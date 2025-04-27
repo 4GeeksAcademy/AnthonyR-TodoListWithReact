@@ -1,18 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
 
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap"
+import "bootstrap";
 
 // index.css'
-import '../styles/index.css'
+import "../styles/index.css";
 
 // components
-import Home from './components/Home';
+import Home from "./components/Home";
+import Card from "./components/Card";
+import Title from "./components/Title";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Home/>
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <Title title={"Todos"} />
+    <Card />
+  </StrictMode>
+);
