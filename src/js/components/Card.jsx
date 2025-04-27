@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //create your first component
 const Card = (props) => {
@@ -16,7 +16,7 @@ const Card = (props) => {
 
   let thirdCardStyles = {
     margin: "auto",
-    marginTop: "-15.5px",
+    marginTop: "-14.5px",
     width: "34rem",
     height: "20px",
     zIndex: "-2",
@@ -26,20 +26,67 @@ const Card = (props) => {
     boxShadow: "0px 0px 5px 1px #cbcbcb",
   };
 
+  let inputStyles = {
+    border: "0px",
+    color: "#797979",
+    fontSize: "25px",
+    fontWeight: "100",
+  };
+
+  let [taskList, setTaskList] = useState([]);
+  let [newtask, setNewTask] = useState();
+
   return (
     <>
       <div className="card" style={props.cardStyle}>
-        <ul
-          className="list-group list-group-flush"
-          style={{ color: "#797979" }}
-        >
-          <li className="list-group-item" style={{ color: "#797979" }}>
-            An item
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            <input
+              className="form-control"
+              type="text"
+              aria-label="input example"
+              placeholder="What needs to be done?"
+              style={inputStyles}
+              onChange={(e) => {
+                setNewTask(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (e.target.value !== "") {
+                    setTaskList((prev) => {
+                      return [...prev, newtask];
+                    });
+                  }
+                }
+              }}
+            />
           </li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
+          {taskList[0] === undefined ? (
+            <li className="list-group-item" style={{ color: "#797979" }}>
+              There are no pending tasks, add tasks
+            </li>
+          ) : (
+            taskList.map((task, idx) => {
+              return (
+                <li
+                  key={task[idx]}
+                  className="list-group-item"
+                  style={{ color: "#797979" }}
+                  onMouseEnter={() => {}}
+                >
+                  {task}
+                  <span></span>
+                </li>
+              );
+            })
+          )}
         </ul>
-        <div className="card-footer">Card footer</div>
+        <div
+          className="card-footer"
+          style={{ height: "38px", fontSize: "15px" }}
+        >
+          Item left
+        </div>
       </div>
       <div className="card" style={secondCardStyles}></div>
       <div className="card" style={thirdCardStyles}></div>

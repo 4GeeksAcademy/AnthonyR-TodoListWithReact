@@ -28,6 +28,7 @@ let cardStyle = {
   boxShadow: "0px 0px 5px 1px #cbcbcb",
 };
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Title title={"Todos"} titleStyle={titleStyle} />
