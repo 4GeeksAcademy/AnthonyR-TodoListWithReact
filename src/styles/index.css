@@ -15,3 +15,12 @@ body {
   justify-content: center;
   background: #f1f1f1;
 }
+
+.exis:hover {
+  color: black;
+}
+
+.hola:focus {
+  border: none;
+  box-shadow: none;
+}

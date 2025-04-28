@@ -34,7 +34,8 @@ const Card = (props) => {
   };
 
   let [taskList, setTaskList] = useState([]);
-  let [newtask, setNewTask] = useState();
+  let [newtask, setNewTask] = useState("");
+  let [hoveredTask, setHoveredTask] = useState(null);
 
   return (
     <>
@@ -42,10 +43,11 @@ const Card = (props) => {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <input
-              className="form-control"
+              className="form-control hola"
               type="text"
               aria-label="input example"
               placeholder="What needs to be done?"
+              value={newtask}
               style={inputStyles}
               onChange={(e) => {
                 setNewTask(e.target.value);
@@ -56,26 +58,45 @@ const Card = (props) => {
                     setTaskList((prev) => {
                       return [...prev, newtask];
                     });
+                    setNewTask("");
                   }
                 }
               }}
             />
           </li>
-          {taskList[0] === undefined ? (
-            <li className="list-group-item" style={{ color: "#797979" }}>
-              There are no pending tasks, add tasks
+          {taskList.length === 0 ? (
+            <li className="list-group-item px-4" style={{ color: "#797979" }}>
+              There are no pending tasks, add tasks...
             </li>
           ) : (
             taskList.map((task, idx) => {
               return (
                 <li
-                  key={task[idx]}
-                  className="list-group-item"
+                  key={idx}
+                  className="list-group-item d-flex justify-content-between align-items-center px-4"
                   style={{ color: "#797979" }}
-                  onMouseEnter={() => {}}
+                  onMouseEnter={() => {
+                    setHoveredTask(idx);
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredTask(null);
+                  }}
                 >
                   {task}
-                  <span></span>
+                  <i
+                    className="fa-solid fa-x exis"
+                    style={{
+                      visibility: hoveredTask === idx ? "visible" : "hidden",
+                      cursor: "pointer",
+                      color: "#f0cace",
+                      fontWeight: "100",
+                    }}
+                    onClick={(e) => {
+                      setTaskList((prev) =>
+                        prev.filter((task, i) => i !== idx)
+                      );
+                    }}
+                  ></i>
                 </li>
               );
             })
@@ -85,7 +106,7 @@ const Card = (props) => {
           className="card-footer"
           style={{ height: "38px", fontSize: "15px" }}
         >
-          Item left
+          {taskList.length} Item left
         </div>
       </div>
       <div className="card" style={secondCardStyles}></div>
