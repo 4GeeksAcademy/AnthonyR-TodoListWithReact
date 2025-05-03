@@ -43,7 +43,7 @@ const Card = (props) => {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <input
-              className="form-control hola"
+              className="form-control"
               type="text"
               aria-label="input example"
               placeholder="What needs to be done?"
@@ -84,11 +84,10 @@ const Card = (props) => {
                 >
                   {task}
                   <i
-                    className="fa-solid fa-x exis"
+                    className="fa-solid fa-x equis"
                     style={{
                       visibility: hoveredTask === idx ? "visible" : "hidden",
                       cursor: "pointer",
-                      color: "#f0cace",
                       fontWeight: "100",
                     }}
                     onClick={(e) => {
